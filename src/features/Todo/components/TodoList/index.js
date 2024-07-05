@@ -3,11 +3,13 @@ import TodoItem from '~/features/Todo/components/TodoItem';
 
 const TodoList = ({
 	items,
+	editItem,
+	setEditItem,
 	onClickDelete,
 	onClickEdit,
 	onClickCancel,
-	editItem,
 	handleEditInput,
+	handleSaveEdit,
 }) => {
 	const renderItems = () => {
 		return items.map((item, index) => {
@@ -48,7 +50,9 @@ const TodoList = ({
 					{renderItems()}
 					{editItem !== false && (
 						<EditItem
+							setEditItem={setEditItem}
 							handleEditInput={handleEditInput}
+							handleSaveEdit={handleSaveEdit}
 							onClickCancel={onClickCancel}
 							editItem={editItem}
 						/>

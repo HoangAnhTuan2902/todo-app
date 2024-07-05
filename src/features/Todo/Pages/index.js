@@ -54,6 +54,12 @@ const TodoFeatures = () => {
 			!willDelete && swal('mày sợ à ?', { icon: 'info' });
 		});
 	};
+
+	const handleSaveEdit = () => {
+		const newItems = [...todoList];
+		newItems[editItem.index] = editItem.item;
+		setTodoList(newItems);
+	};
 	const onClickEdit = (item, index) => {
 		setEditItem({ index, item });
 	};
@@ -88,9 +94,11 @@ const TodoFeatures = () => {
 				</div>
 			</div>
 			<TodoList
-				handleEditInput={handleEditInput}
+				handleSaveEdit={handleSaveEdit}
+				setEditItem={setEditItem}
 				editItem={editItem}
 				items={todoList}
+				handleEditInput={handleEditInput}
 				onClickEdit={onClickEdit}
 				onClickCancel={onClickCancel}
 				onClickDelete={onClickDelete}

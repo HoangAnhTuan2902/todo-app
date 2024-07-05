@@ -1,33 +1,16 @@
 function TodoItem({ index, name, level, onClickDelete, onClickEdit }) {
-	switch (level) {
-		case 0:
-			level = 'Low';
-			break;
-		case 1:
-			level = 'Medium';
-			break;
-		case 2:
-			level = 'High';
-			break;
-		default:
-			break;
-	}
-
+	const levelMapping = {
+		0: { text: 'Low', class: 'label label-default' },
+		1: { text: 'Medium', class: 'label label-info' },
+		2: { text: 'High', class: 'label label-danger' },
+	};
+	const { text, class: levelClass } = levelMapping[level] || { text: level, class: '' };
 	return (
 		<tr>
 			<td className="text-center">{index}</td>
 			<td>{name}</td>
 			<td className="text-center">
-				<span
-					className={
-						level === 'Low'
-							? 'label label-default'
-							: level === 'Medium'
-							? 'label label-info'
-							: 'label label-danger'
-					}>
-					{level}
-				</span>
+				<span className={levelClass}>{text}</span>
 			</td>
 			<td>
 				<button

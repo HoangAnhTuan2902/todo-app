@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
-function EditItem({ onClickCancel, editItem, handleEditInput }) {
+function EditItem({ onClickCancel, editItem, setEditItem, handleEditInput, handleSaveEdit }) {
 	const initLevel = editItem.item.level;
 
 	const [level, setLevel] = useState(initLevel);
+	console.log(level);
 	useEffect(() => {
 		setLevel(initLevel);
 	}, [initLevel]);
 
+	useEffect(() => {
+		// Cập nhật editItem mỗi khi level thay đổi
+		const updatedItem = { ...editItem, item: { ...editItem.item, level: level } };
+		setEditItem(updatedItem);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [level]);
 	const handleChangeLevel = (e) => {
 		setLevel(e.target.value);
 	};
-
 	return (
 		<tr>
 			<td className="text-center">{editItem.index}</td>
@@ -41,6 +47,7 @@ function EditItem({ onClickCancel, editItem, handleEditInput }) {
 					Cancel
 				</button>
 				<button
+					onClick={handleSaveEdit}
 					type="button"
 					className="btn btn-success btn-sm">
 					Save
