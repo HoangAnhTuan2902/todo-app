@@ -4,7 +4,6 @@ function EditItem({ onClickCancel, editItem, setEditItem, handleEditInput, handl
 	const initLevel = editItem.item.level;
 
 	const [level, setLevel] = useState(initLevel);
-	console.log(level);
 	useEffect(() => {
 		setLevel(initLevel);
 	}, [initLevel]);

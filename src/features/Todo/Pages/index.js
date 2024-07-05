@@ -1,7 +1,9 @@
+import lodash from 'lodash';
 import swal from 'sweetalert';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useDebounce } from '~/components/Hooks';
 import TodoTitle from '~/features/Todo/components/TodoTitle';
 import SearchIem from '~/features/Todo/components/SearchItem';
 import SortItem from '~/features/Todo/components/SortItem';
@@ -43,31 +45,81 @@ const TodoFeatures = () => {
 	];
 
 	const [todoList, setTodoList] = useState(initTodoList);
+	const [originalTodoList, setOriginalTodoList] = useState(initTodoList);
 	const [editItem, setEditItem] = useState(false);
+	const [toggleForm, setToggleForm] = useState(false);
+	const [sort, setSort] = useState({ type: 'Name', order: 'ASC' });
+	const [search, setSearch] = useState('');
+
+	const debouncedSearch = useDebounce(search, 500);
+	useEffect(() => {
+		const newItems = originalTodoList.filter((item) =>
+			item.name.toLowerCase().includes(debouncedSearch.toLowerCase()),
+		);
+		setTodoList(newItems);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [debouncedSearch, originalTodoList]);
+
+	const handleSort = () => {
+		const sortedTodos = lodash.orderBy(
+			todoList,
+			[sort.type.toLowerCase()],
+			[sort.order.toLowerCase()],
+		);
+		setTodoList(sortedTodos);
+	};
+	const handleSubmit = (data) => {
+		if (!data.name) {
+			swal('Bạn chưa nhập tên công việc', { icon: 'warning' });
+			return;
+		}
+		const newItems = [...todoList];
+		newItems.push({ id: uuidv4(), ...data });
+		setOriginalTodoList(newItems);
+		setTodoList(newItems);
+	};
+
 	const onClickDelete = (index) => {
 		swal({
-			title: 'mày muốn xóa ?',
+			title: 'bạn muốn xóa ?',
 			icon: 'warning',
 			buttons: true,
 		}).then((willDelete) => {
 			willDelete && setTodoList(todoList.filter((item, idx) => idx !== index));
-			!willDelete && swal('mày sợ à ?', { icon: 'info' });
+			!willDelete && swal('bạn sợ à ?', { icon: 'info' });
 		});
 	};
 
 	const handleSaveEdit = () => {
-		const newItems = [...todoList];
-		newItems[editItem.index] = editItem.item;
-		setTodoList(newItems);
+		swal({
+			title: 'bạn muốn lưu thay đổi ?',
+			icon: 'warning',
+			buttons: true,
+		}).then((willSave) => {
+			if (willSave) {
+				const newItems = [...todoList];
+				newItems[editItem.index] = editItem.item;
+				setTodoList(newItems);
+				setEditItem(false);
+			}
+		});
 	};
 	const onClickEdit = (item, index) => {
 		setEditItem({ index, item });
 	};
+
 	const handleEditInput = (e) => {
 		setEditItem({ ...editItem, item: { ...editItem.item, name: e.target.value } });
 	};
+
 	const onClickCancel = () => {
-		setEditItem(false);
+		swal({
+			title: 'bạn muốn hủy thay đổi ?',
+			icon: 'warning',
+			buttons: true,
+		}).then((willCancel) => {
+			willCancel && setEditItem(false);
+		});
 	};
 
 	return (
@@ -75,22 +127,30 @@ const TodoFeatures = () => {
 			<TodoTitle />
 			<div className="row">
 				<div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-					<SearchIem />
+					<SearchIem
+						search={search}
+						setSearch={setSearch}
+					/>
 				</div>
 				<div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-					<SortItem />
+					<SortItem
+						handleSort={handleSort}
+						sort={sort}
+						setSort={setSort}
+					/>
 				</div>
 				<div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 					<button
+						onClick={() => setToggleForm(!toggleForm)}
 						className="btn btn-info btn-block marginB10"
 						type="button">
-						Add Item
+						{!toggleForm ? 'Add Item' : 'Close'}
 					</button>
 				</div>
 			</div>
 			<div className="row marginB10">
 				<div className="col-md-offset-7 col-md-5">
-					<FormAddItem />
+					{toggleForm && <FormAddItem handleSubmit={handleSubmit} />}
 				</div>
 			</div>
 			<TodoList

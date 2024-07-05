@@ -1,25 +1,38 @@
-function Sort() {
+import React, { useState } from 'react';
+function Sort({ sort, setSort, handleSort }) {
+	const [popup, setPopup] = useState('');
+	const handleSortSelection = (type, order) => {
+		setSort({ type, order });
+	};
+
 	return (
-		<div className="dropdown">
+		<div className={`dropdown ${popup}`}>
 			<button
+				onClick={() => setPopup(popup === 'open' ? '' : 'open')}
 				className="btn btn-default dropdown-toggle"
 				type="button"
 				data-toggle="dropdown"
 				aria-haspopup="true"
-				aria-expanded="true">
+				aria-expanded="false">
 				Sort by <span className="caret" />
 			</button>
 			<ul className="dropdown-menu">
 				<li>
 					<a
-						href="/"
+						onClick={() => {
+							handleSortSelection('Name', 'ASC');
+							setPopup('');
+						}}
 						role="button">
 						Name ASC
 					</a>
 				</li>
 				<li>
 					<a
-						href="/"
+						onClick={() => {
+							handleSortSelection('Name', 'DESC');
+							setPopup('');
+						}}
 						role="button">
 						Name DESC
 					</a>
@@ -30,20 +43,30 @@ function Sort() {
 				/>
 				<li>
 					<a
-						href="/"
+						onClick={() => {
+							handleSortSelection('Level', 'ASC');
+							setPopup('');
+						}}
 						role="button">
 						Level ASC
 					</a>
 				</li>
 				<li>
 					<a
-						href="/"
+						onClick={() => {
+							handleSortSelection('Level', 'DESC');
+							setPopup('');
+						}}
 						role="button">
 						Level DESC
 					</a>
 				</li>
 			</ul>
-			<span className="label label-success label-medium">NAME - DESC</span>
+			<span
+				onClick={handleSort}
+				className="label label-success label-medium">
+				{sort.type} - {sort.order}
+			</span>
 		</div>
 	);
 }

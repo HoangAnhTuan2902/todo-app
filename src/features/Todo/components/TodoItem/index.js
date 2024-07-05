@@ -1,10 +1,6 @@
+import { arrayLevel } from '~/components/ArrayLevel';
 function TodoItem({ index, name, level, onClickDelete, onClickEdit }) {
-	const levelMapping = {
-		0: { text: 'Low', class: 'label label-default' },
-		1: { text: 'Medium', class: 'label label-info' },
-		2: { text: 'High', class: 'label label-danger' },
-	};
-	const { text, class: levelClass } = levelMapping[level] || { text: level, class: '' };
+	const { text, class: levelClass } = arrayLevel[level] || { text: level, class: '' };
 	return (
 		<tr>
 			<td className="text-center">{index}</td>

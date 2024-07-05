@@ -9,4 +9,5 @@
 .label-medium {
     padding: 9px 10px;
     font-size: 13px;
+    cursor: pointer;
 }
