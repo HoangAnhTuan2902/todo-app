@@ -11,20 +11,36 @@ function Sort() {
 			</button>
 			<ul className="dropdown-menu">
 				<li>
-					<a role="button">Name ASC</a>
+					<a
+						href="/"
+						role="button">
+						Name ASC
+					</a>
 				</li>
 				<li>
-					<a role="button">Name DESC</a>
+					<a
+						href="/"
+						role="button">
+						Name DESC
+					</a>
 				</li>
 				<li
 					role="separator"
 					className="divider"
 				/>
 				<li>
-					<a role="button">Level ASC</a>
+					<a
+						href="/"
+						role="button">
+						Level ASC
+					</a>
 				</li>
 				<li>
-					<a role="button">Level DESC</a>
+					<a
+						href="/"
+						role="button">
+						Level DESC
+					</a>
 				</li>
 			</ul>
 			<span className="label label-success label-medium">NAME - DESC</span>

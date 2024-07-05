@@ -1,4 +1,4 @@
-function Search() {
+function SearchIem() {
 	return (
 		<div className="input-group">
 			<input
@@ -17,4 +17,4 @@ function Search() {
 	);
 }
 
-export default Search;
+export default SearchIem;

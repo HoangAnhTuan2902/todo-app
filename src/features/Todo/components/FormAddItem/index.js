@@ -1,4 +1,4 @@
-function Form() {
+function FormAddItem() {
 	return (
 		<form className="form-inline">
 			<div className="form-group">
@@ -29,4 +29,4 @@ function Form() {
 	);
 }
 
-export default Form;
+export default FormAddItem;

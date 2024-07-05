@@ -1,4 +1,4 @@
-function Title() {
+function TodoTitle() {
 	return (
 		<div className="page-header">
 			<h1>
@@ -8,4 +8,4 @@ function Title() {
 	);
 }
 
-export default Title;
+export default TodoTitle;
