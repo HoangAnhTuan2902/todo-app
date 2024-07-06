@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 function FormAddItem({ handleSubmit }) {
 	const [data, setData] = useState({ name: '', level: 0 });
+	const inputRef = useRef();
 
 	const handleClearForm = () => {
 		setData({ name: '', level: 0 });
@@ -11,6 +12,7 @@ function FormAddItem({ handleSubmit }) {
 		<form className="form-inline">
 			<div className="form-group">
 				<input
+					ref={inputRef}
 					onChange={(e) => setData({ ...data, name: e.target.value })}
 					value={data.name}
 					type="text"
@@ -32,16 +34,20 @@ function FormAddItem({ handleSubmit }) {
 				onClick={() => {
 					handleSubmit(data);
 					handleClearForm();
+					inputRef.current.focus();
 				}}
 				type="button"
 				className="btn btn-primary">
 				Submit
 			</button>
 			<button
-				onClick={handleClearForm}
+				onClick={() => {
+					handleClearForm();
+					inputRef.current.focus();
+				}}
 				type="button"
 				className="btn btn-default">
-				Cancel
+				Clear
 			</button>
 		</form>
 	);

@@ -85,8 +85,11 @@ const TodoFeatures = () => {
 			icon: 'warning',
 			buttons: true,
 		}).then((willDelete) => {
-			willDelete && setTodoList(todoList.filter((item, idx) => idx !== index));
-			!willDelete && swal('bạn sợ à ?', { icon: 'info' });
+			if (willDelete) {
+				setTodoList(todoList.filter((item, idx) => idx !== index));
+				setOriginalTodoList(todoList.filter((item, idx) => idx !== index));
+			}
+			swal('bạn sợ à ?', { icon: 'info' });
 		});
 	};
 
@@ -100,6 +103,7 @@ const TodoFeatures = () => {
 				const newItems = [...todoList];
 				newItems[editItem.index] = editItem.item;
 				setTodoList(newItems);
+				setOriginalTodoList(newItems);
 				setEditItem(false);
 			}
 		});
@@ -154,10 +158,10 @@ const TodoFeatures = () => {
 				</div>
 			</div>
 			<TodoList
-				handleSaveEdit={handleSaveEdit}
-				setEditItem={setEditItem}
-				editItem={editItem}
 				items={todoList}
+				editItem={editItem}
+				setEditItem={setEditItem}
+				handleSaveEdit={handleSaveEdit}
 				handleEditInput={handleEditInput}
 				onClickEdit={onClickEdit}
 				onClickCancel={onClickCancel}
