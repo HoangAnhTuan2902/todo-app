@@ -1,52 +1,56 @@
 {
-  "name": "todo-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "classnames": "^2.5.1",
-    "clsx": "^2.1.1",
-    "lodash": "^4.17.21",
-    "normalize.css": "^8.0.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.0",
-    "react-scripts": "5.0.1",
-    "sweetalert": "^2.1.2",
-    "sweetalert-react": "^0.4.11",
-    "uuid": "^10.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "babel-plugin-module-resolver": "^5.0.2",
-    "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.2.1",
-    "sass": "^1.77.6"
-  }
+	"homepage": "http://hoanganhtuan2902.github.io/todo-app",
+	"name": "todo-app",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@testing-library/jest-dom": "^5.17.0",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"classnames": "^2.5.1",
+		"clsx": "^2.1.1",
+		"lodash": "^4.17.21",
+		"normalize.css": "^8.0.1",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-router-dom": "^6.24.0",
+		"react-scripts": "5.0.1",
+		"sweetalert": "^2.1.2",
+		"sweetalert-react": "^0.4.11",
+		"uuid": "^10.0.0",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"start": "react-app-rewired start",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
+		"build": "react-app-rewired build",
+		"test": "react-app-rewired test",
+		"eject": "react-app-rewired eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"babel-plugin-module-resolver": "^5.0.2",
+		"customize-cra": "^1.0.0",
+		"gh-pages": "^6.1.1",
+		"react-app-rewired": "^2.2.1",
+		"sass": "^1.77.6"
+	}
 }
