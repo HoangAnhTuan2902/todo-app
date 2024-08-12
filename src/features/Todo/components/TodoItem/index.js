@@ -10,29 +10,30 @@ function TodoItem({ index, name, level, onClickDelete, onClickEdit }) {
 
 	return (
 		<tr>
-			<td className="text-center">{index}</td>
+			<td className='text-center'>{index}</td>
 			<td className={checkbox ? classNames('active-item') : classNames('')}>{name}</td>
-			<td className="text-center">
+			<td className='text-center'>
 				<span className={levelClass}>{text}</span>
 			</td>
 			<td>
 				<button
+					style={{ marginRight: 10 }}
 					onClick={onClickEdit}
-					type="button"
-					className="btn btn-warning btn-sm">
+					type='button'
+					className='btn btn-warning btn-sm'>
 					Edit
 				</button>
 				<button
 					onClick={() => onClickDelete(index)}
-					type="button"
-					className="btn btn-danger btn-sm">
+					type='button'
+					className='btn btn-danger btn-sm'>
 					Delete
 				</button>
 				<input
 					value={checkbox}
 					onChange={(e) => setCheckbox(e.target.checked)}
 					style={{ marginLeft: 10 }}
-					type="checkbox"
+					type='checkbox'
 				/>
 			</td>
 		</tr>
